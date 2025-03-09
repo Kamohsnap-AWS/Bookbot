@@ -5,24 +5,26 @@ def get_word_count(text):
 def get_char_count(text):
     # Keeps track of the count of every character that appears in the text
     chars = {}
-    
-    # Initializes characters not in dictonary with value of 1.
-    # Increments character counter by 1 if already in dictionary.
-    for ch in text.lower():
-        if ch in chars:
-            chars[ch] += 1
+    for char in text.lower():
+        if char in chars:
+            chars[char] += 1
         else:
-            chars[ch] = 1
-
+            chars[char] = 1
     return chars
 
-def print_report(w_count, c_dict):
+def sort_chars(chars):
+    # Converts chars dict to a list of valid key-value pairs
+    chars_list = [[key, values] for key, values in chars.items() if key.isalpha()]
+    # We want our items stored largest to smallest
+    sorted_chars = sorted(chars_list, key=lambda x: x[1], reverse=True)
+    return sorted_chars  
+
+def print_report(w_count, chars):
     print("--- Begin Report ---")
     print(f"{w_count} words found in the document\n")
-
-    # Prints all the alphabetical characters and the number of times they appear
-    for key in sorted(c_dict):
-        if key.isalpha():
-            print(f"The '{key}' character was found {c_dict[key]} times")
+    sorted_chars = sort_chars(chars)
+    
+    for char in sorted_chars:
+        print(f"'{char[0]}: {char[1]}'")
 
     print("\n--- End Report ---")
