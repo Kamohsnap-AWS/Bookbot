@@ -1,4 +1,7 @@
 # Ignore list for BookBot project
 
-# List of books used for testing
+# List of books used
 books/
+
+# Cached files
+__pycache__/
